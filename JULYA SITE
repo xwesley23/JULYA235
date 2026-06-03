@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Julya Nail Designer | Estúdio de Luxo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --skin-1: #f5ede6;
+            --skin-2: #e8d5c4;
+            --skin-3: #d4b5a0;
+            --white:  #ffffff;
+            --off-white: #faf8f6;
+            --gold:   #c4984a;
+            --gold-2: #d9ae6a;
+            --gold-pale: #f0e0c8;
+            --gray-1: #f0ecea;
+            --gray-2: #b0a49e;
+            --gray-3: #6b5f58;
+            --ink:    #2a2220;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+            background: var(--off-white);
+            color: var(--ink);
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 20px 24px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: background 0.5s, padding 0.4s, backdrop-filter 0.5s;
+        }
+        nav.scrolled {
+            background: rgba(250,248,246,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(196,152,74,0.15);
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 400;
+        }
+        .nav-cta {
+            font-size: 0.6rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            border: 1px solid var(--gold);
+            padding: 8px 18px;
+            transition: all 0.3s;
+            font-weight: 400;
+        }
+        .nav-cta:active { background: var(--gold); color: white; }
+
+        #hero {
+            min-height: 100svh;
+            background: linear-gradient(160deg, var(--skin-1) 0%, var(--skin-2) 60%, var(--skin-3) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 28px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -80px;
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: 80px; right: -40px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(196,152,74,0.3);
+            pointer-events: none;
+        }
+
+        .hero-monogram {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-45%, -52%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 55vw;
+            font-weight: 300;
+            color: rgba(255,255,255,0.14);
+            line-height: 1;
+            user-select: none;
+            pointer-events: none;
+            letter-spacing: -5px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.3s forwards;
+        }
+        .hero-tag::before {
+            content: '';
+            width: 28px; height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 14vw, 5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -1px;
+            color: var(--ink);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.5s forwards;
+        }
+        .hero-title em { font-style: italic; color: var(--gold); }
+
+        .hero-sub {
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            color: var(--gray-3);
+            line-height: 1.9;
+            max-width: 300px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.7s forwards;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.9s forwards;
+        }
+        .hero-btn-circle {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        .hero-btn:active .hero-btn-circle { transform: scale(0.9); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 56px; right: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeIn 1s 1.4s forwards;
+        }
+        .hero-scroll span {
+            font-size: 0.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray-2);
+            writing-mode: vertical-rl;
+        }
+        .scroll-bar {
+            width: 1px; height: 44px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        .marquee-band {
+            background: var(--ink);
+            padding: 14px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-inner {
+            display: inline-block;
+            animation: marquee 22s linear infinite;
+        }
+        .marquee-item {
+            display: inline-block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-2);
+            padding: 0 28px;
+        }
+        .marquee-sep {
+            display: inline-block;
+            color: var(--gold);
+            opacity: 0.5;
+            font-size: 0.5rem;
+        }
+
+        #servicos {
+            padding: 72px 28px 60px;
+            background: var(--white);
+        }
+        .sec-label {
+            font-size: 0.58rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sec-label::after { content: ''; flex: 1; height: 1px; background: var(--gold-pale); }
+
+        .sec-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 10vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 48px;
+        }
+        .sec-title em { font-style: italic; color: var(--gold); }
+
+        .services-list { display: flex; flex-direction: column; }
+
+        .service-item {
+            border-bottom: 1px solid var(--gray-1);
+            padding: 22px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .service-item:first-child { border-top: 1px solid var(--gray-1); }
+
+        .service-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .service-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: var(--gold);
+            font-style: italic;
+            min-width: 28px;
+        }
+        .service-info { flex: 1; }
+        .service-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        .service-item.open .service-name,
+        .service-item:active .service-name { color: var(--gold); }
+
+        .service-price {
+            font-size: 0.7rem;
+            color: var(--gray-2);
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+        .service-icon {
+            width: 32px; height: 32px;
+            border: 1px solid rgba(196,152,74,0.3);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            font-size: 1rem;
+            transition: all 0.35s;
+            flex-shrink: 0;
+        }
+        .service-item.open .service-icon {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+            transform: rotate(45deg);
+        }
+        .service-desc {
+            font-size: 0.78rem;
+            line-height: 1.8;
+            color: var(--gray-3);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            padding-left: 44px;
+            font-style: italic;
+        }
+        .service-item.open .service-desc {
+            max-height: 180px;
+            padding-top: 12px;
+        }
+
+        .combos-section {
+            margin-top: 70px;
+            border-top: 1px solid var(--gold-pale);
+            padding-top: 48px;
+        }
+        .combo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-top: 32px;
+        }
+        .combo-card {
+            background: var(--off-white);
+            border: 1px solid var(--gold-pale);
+            padding: 24px 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .combo-card:active { transform: scale(0.98); }
+        .combo-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--ink);
+            font-size: 0.55rem;
+            letter-spacing: 2px;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .combo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        .combo-items {
+            font-size: 0.7rem;
+            color: var(--gray-3);
+            margin: 14px 0;
+            line-height: 1.5;
+        }
+        .combo-price {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-top: 12px;
+        }
+        .combo-save {
+            font-size: 0.65rem;
+            color: #2e7d32;
+            margin-left: 8px;
+            font-weight: 400;
+        }
+
+        .highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--gray-1);
+            margin-top: 1px;
+        }
+        .highlight-card {
+            background: var(--white);
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .highlight-card:first-child {
+            background: var(--skin-1);
+        }
+        .hl-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .hl-label {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray-3);
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        #form {
+            padding: 72px 28px 80px;
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+        #form::before {
+            content: '';
+            position: absolute;
+            top: -120px; right: -80px;
+            width: 360px; height: 360px;
+            border-radius: 50%;
+            border: 1px solid rgba(196,152,74,0.1);
+            pointer-events: none;
+        }
+
+        .form-label {
+            font-size: 0.58rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-2);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .form-label::after { content: ''; flex: 1; height: 1px; background: rgba(196,152,74,0.2); }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 10vw, 3.2rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+        .form-title em { font-style: italic; color: var(--gold-2); }
+
+        .form-sub {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.38);
+            line-height: 1.9;
+            margin-bottom: 44px;
+        }
+
+        .field { margin-bottom: 28px; position: relative; }
+        .field label {
+            display: block;
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 10px;
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(196,152,74,0.2);
+            padding: 12px 0;
+            color: var(--white);
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            outline: none;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            transition: border-color 0.3s;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus { border-bottom-color: var(--gold); }
+        .field input::placeholder,
+        .field textarea::placeholder { color: rgba(255,255,255,0.18); }
+        .field select option { background: #2a2220; }
+        .field textarea { resize: none; min-height: 72px; }
+
+        .field.error input,
+        .field.error select,
+        .field.error textarea {
+            border-bottom-color: #d9534f;
+        }
+        .error-message {
+            font-size: 0.55rem;
+            color: #d9534f;
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .btn-whatsapp {
+            width: 100%;
+            padding: 18px;
+            background: var(--gold);
+            border: none;
+            color: var(--ink);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.3s, transform 0.15s;
+            margin-top: 8px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-whatsapp:active { background: var(--gold-2); transform: scale(0.98); }
+        .btn-whatsapp svg { width: 18px; height: 18px; }
+
+        footer {
+            background: #181210;
+            padding: 48px 28px 36px;
+            border-top: 1px solid rgba(196,152,74,0.1);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--gold-2);
+            margin-bottom: 10px;
+        }
+        .footer-tag {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 28px;
+        }
+        .footer-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.3;
+            margin: 0 auto 24px;
+        }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin: 24px 0 20px;
+        }
+        .footer-social a {
+            color: rgba(255,255,255,0.35);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer-social a:active { color: var(--gold-2); }
+        .footer-social svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+        .footer-map {
+            margin-top: 20px;
+        }
+        .footer-map a {
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .footer-map a:active { color: var(--gold-2); }
+        .footer-map svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-container {
+            background: var(--off-white);
+            max-width: 440px;
+            width: 85%;
+            padding: 32px 28px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.4);
+            transform: scale(0.96);
+            transition: transform 0.25s;
+        }
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            color: var(--ink);
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+        .modal-message {
+            font-size: 0.8rem;
+            color: var(--gray-3);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .modal-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            padding: 10px 22px;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--ink);
+        }
+        .modal-btn-primary {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--ink);
+        }
+        .modal-btn-primary:active { background: var(--gold-2); transform: scale(0.96); }
+        .modal-btn:active { transform: scale(0.96); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+            50%       { opacity: 1;   transform: scaleY(1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            nav { padding: 28px 60px; }
+            nav.scrolled { padding: 18px 60px; }
+            #hero {
+                padding: 0 80px 80px;
+                flex-direction: row;
+                align-items: flex-end;
+            }
+            .hero-title { font-size: clamp(4rem, 7vw, 6.5rem); }
+            .hero-monogram { font-size: 45vw; }
+            #servicos { padding: 100px 80px; }
+            #form { padding: 100px 80px; }
+            .form-inner-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+                align-items: start;
+            }
+            footer { padding: 64px 80px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <a href="#" class="nav-logo">JND</a>
+    <a href="#form" class="nav-cta">Agendar</a>
+</nav>
+
+<section id="hero">
+    <div class="hero-monogram">J</div>
+    <div class="hero-content">
+        <div class="hero-tag">Estúdio de Luxo</div>
+        <h1 class="hero-title">Julya<br><em>Nail</em><br>Designer</h1>
+        <p class="hero-sub">A excelência em cada detalhe das suas unhas. Uma experiência criada só para você.</p>
+        <a href="#form" class="hero-btn">
+            <div class="hero-btn-circle">→</div>
+            Agendar Agora
+        </a>
+    </div>
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-bar"></div>
+    </div>
+</section>
+
+<div class="marquee-band" aria-hidden="true">
+    <div class="marquee-inner" id="marqueeInner"></div>
+</div>
+
+<section id="servicos">
+    <div class="sec-label">O que oferecemos</div>
+    <h2 class="sec-title">Nossos<br><em>Serviços</em></h2>
+    <div class="services-list" id="servicesList"></div>
+    <div class="combos-section" id="combosSection"></div>
+    <div style="margin-top: 30px; font-size: 0.7rem; text-align: center; color: var(--gray-2); font-style: italic;">Todos os procedimentos de unhas incluem cutilagem.</div>
+</section>
+
+<div class="highlights">
+    <div class="highlight-card reveal">
+        <div class="hl-num">9+</div>
+        <div class="hl-label">Serviços<br>Exclusivos</div>
+    </div>
+    <div class="highlight-card reveal">
+        <div class="hl-num">100%</div>
+        <div class="hl-label">Produtos<br>Premium</div>
+    </div>
+    <div class="highlight-card reveal">
+        <div class="hl-num">15d</div>
+        <div class="hl-label">Durabilidade<br>Garantida</div>
+    </div>
+    <div class="highlight-card reveal">
+        <div class="hl-num">★★★</div>
+        <div class="hl-label">Atendimento<br>Luxo</div>
+    </div>
+</div>
+
+<section id="form">
+    <div class="form-inner-grid">
+        <div class="form-head reveal">
+            <div class="form-label">Agendamento</div>
+            <h2 class="form-title">Reserve<br>seu <em>Momento</em></h2>
+            <p class="form-sub">Atendimento exclusivo mediante agendamento. Confirmamos via WhatsApp em até 24h.</p>
+        </div>
+
+        <form id="appointmentForm">
+            <div class="field reveal" data-field="name">
+                <label>Nome Completo</label>
+                <input type="text" id="name" placeholder="Seu nome completo" required autocomplete="name">
+            </div>
+            <div class="field reveal" data-field="phone">
+                <label>Telefone</label>
+                <input type="tel" id="phone" placeholder="(00) 00000-0000" required autocomplete="tel">
+            </div>
+            <div class="field reveal" data-field="service">
+                <label>Serviço Desejado</label>
+                <select id="service" required></select>
+            </div>
+            <div class="field-row">
+                <div class="field reveal" data-field="date">
+                    <label>Data</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="field reveal" data-field="time">
+                    <label>Horário</label>
+                    <input type="time" id="time" required>
+                </div>
+            </div>
+            <div class="field reveal">
+                <label>Observações</label>
+                <textarea id="obs" placeholder="Preferências, referências de design..."></textarea>
+            </div>
+            <button type="submit" class="btn-whatsapp reveal">
+                <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.86L.057 23.27a.75.75 0 00.916.916l5.41-1.477A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.75 9.75 0 01-4.983-1.366l-.357-.213-3.707 1.011 1.011-3.707-.213-.357A9.75 9.75 0 1112 21.75z"/>
+                </svg>
+                Solicitar pelo WhatsApp
+            </button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">Julya Nail Designer</div>
+    <div class="footer-tag">Estúdio de Luxo</div>
+    <div class="footer-divider"></div>
+    <div class="footer-social">
+        <a href="https://www.instagram.com/julya_naildsigner_" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85 0 3.205-.012 3.585-.069 4.85-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.26-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.645-.07-4.85 0-3.204.012-3.584.07-4.849.148-3.225 1.664-4.771 4.919-4.919 1.266-.058 1.645-.07 4.85-.07zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.053.014 8.333 0 8.741 0 12c0 3.259.014 3.667.072 4.947.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.667-.014 4.947-.072 4.358-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.688.072-4.947 0-3.259-.014-3.667-.072-4.947-.2-4.358-2.618-6.78-6.98-6.98C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 11-2.881 0 1.44 1.44 0 012.88 0z"/></svg>
+            @julya_naildsigner_
+        </a>
+    </div>
+    <div class="footer-map">
+        <a href="https://www.google.com.br/maps/place/Av.+Dois,+1040+-+Vila+Rica,+Jaboat%C3%A3o+dos+Guararapes+-+PE,+54100-425/@-8.123453,-35.0271939,18z/data=!4m5!3m4!1s0x7ab1d45833bed43:0xaa59b763dd13ac04!8m2!3d-8.123453!4d-35.0271939" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Av. Dois, 1040 - Vila Rica, Jaboatão dos Guararapes - PE
+        </a>
+    </div>
+    <div class="footer-info">
+        Atendimento exclusivo mediante agendamento.<br>
+        © 2025 Julya Nail Designer
+    </div>
+</footer>
+
+<div id="modalConfirm" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-title">Agendamento Recebido</div>
+        <div class="modal-message">Seu pedido foi enviado para o WhatsApp com sucesso. Deseja adicionar este compromisso ao seu calendário?</div>
+        <div class="modal-buttons">
+            <button id="modalAddCalendar" class="modal-btn modal-btn-primary">Adicionar ao Calendário</button>
+            <button id="modalCloseBtn" class="modal-btn">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function(){
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        const services = [
+            { 
+                name: "Alongamento de Unhas", 
+                price: "Aplicação: R$95,00 | Manutenção: R$75,00 | Unha Quebrada: R$5,00",
+                desc: "Ideal para quem deseja unhas instantaneamente longas, resistentes e personalizadas. Permite escolher formato, tamanho e decoração. Durabilidade e manutenção entre 15 e 30 dias."
+            },
+            { 
+                name: "Banho de Gel", 
+                price: "Aplicação: R$85,00 | Manutenção: R$75,00 | Unha Quebrada: R$5,00",
+                desc: "Ideal para unhas naturais que crescem mas quebram. Oferece proteção, resistência e acabamento sofisticado. Permite encapsulamentos e decorações. Durabilidade entre 15 e 30 dias."
+            },
+            { 
+                name: "Esmaltação em Gel", 
+                price: "R$50,00",
+                desc: "Maior durabilidade que esmaltes tradicionais. Brilho intenso. Secagem imediata. Durabilidade de 15 a 20 dias."
+            },
+            { 
+                name: "Blindagem", 
+                price: "R$50,00",
+                desc: "Proteção para unhas naturais. Mantém aspecto saudável. Ideal para quem gosta de unhas curtas. Durabilidade entre 15 e 20 dias. Não inclui esmaltação em gel."
+            },
+            { 
+                name: "Remoção", 
+                price: "Consultar",
+                desc: "Remoção segura do gel sem danificar as unhas naturais. Ideal para troca de procedimento ou retirada definitiva."
+            },
+            { 
+                name: "Spa dos Pés", 
+                price: "R$60,00",
+                desc: "Inclui: Higienização • Remoção de calosidades • Lixamento manual e com motor • Esfoliação • Hidratação profunda • Cutilagem • Massagem relaxante. Resultado imediato."
+            },
+            { 
+                name: "Esmaltação em Gel nos Pés", 
+                price: "R$40,00",
+                desc: "Acabamento impecável. Brilho duradouro. Durabilidade de 20 a 30 dias."
+            },
+            { 
+                name: "Design de Sobrancelhas", 
+                price: "R$25,00",
+                desc: "Design personalizado conforme o formato do rosto. Mais simetria e harmonia facial. Duração média de 15 a 30 dias."
+            },
+            { 
+                name: "Design com Henna", 
+                price: "R$30,00",
+                desc: "Definição e preenchimento das sobrancelhas. Acabamento natural e elegante."
+            }
+        ];
+
+        // APENAS O COMBO PÉS PERFEITOS
+        const combos = [
+            { name: "Pés Perfeitos", price: 85, items: ["Spa dos Pés", "Esmaltação em Gel nos Pés"], badge: "Mais Pedido", economy: 15 }
+        ];
+
+        const marqueeInner = document.getElementById('marqueeInner');
+        let mc = '';
+        for (let i = 0; i < 4; i++) {
+            services.forEach(s => {
+                mc += `<span class="marquee-item">${s.name}</span><span class="marquee-sep">✦</span>`;
+            });
+        }
+        marqueeInner.innerHTML = mc;
+
+        const servicesList = document.getElementById('servicesList');
+        const serviceSelect = document.getElementById('service');
+        servicesList.innerHTML = '';
+        serviceSelect.innerHTML = '<option value="">Selecione um serviço</option>';
+
+        services.forEach((s, idx) => {
+            const opt = document.createElement('option');
+            opt.value = s.name;
+            opt.textContent = s.name;
+            serviceSelect.appendChild(opt);
+
+            const item = document.createElement('div');
+            item.className = 'service-item reveal';
+            item.innerHTML = `
+                <div class="service-row">
+                    <span class="service-num">0${idx+1}</span>
+                    <div class="service-info">
+                        <div class="service-name">${s.name}</div>
+                        <div class="service-price">${s.price}</div>
+                    </div>
+                    <div class="service-icon">+</div>
+                </div>
+                <div class="service-desc">${s.desc}</div>`;
+            item.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.service-item.open').forEach(el => el.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+            servicesList.appendChild(item);
+        });
+
+        const combosSection = document.getElementById('combosSection');
+        if(combosSection) {
+            combosSection.innerHTML = `
+                <div class="sec-label">Especiais</div>
+                <h2 class="sec-title">Nossos<br><em>Combos</em></h2>
+                <div class="combo-grid" id="comboGrid"></div>
+            `;
+            const comboGrid = document.getElementById('comboGrid');
+            combos.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'combo-card reveal';
+                let badgeHtml = c.badge ? `<div class="combo-badge">${c.badge}</div>` : '';
+                let saveHtml = c.economy > 0 ? `<span class="combo-save">(Economia R$${c.economy},00)</span>` : '';
+                card.innerHTML = `
+                    ${badgeHtml}
+                    <div class="combo-name">${c.name}</div>
+                    <div class="combo-items">${c.items.join(' • ')}</div>
+                    <div class="combo-price">R$${c.price},00 ${saveHtml}</div>
+                `;
+                comboGrid.appendChild(card);
+            });
+        }
+
+        function isTimeSlotValid(dateStr, timeStr) {
+            if (!dateStr || !timeStr) return true;
+            const selectedDate = new Date(dateStr);
+            const dayOfWeek = selectedDate.getDay();
+            if (dayOfWeek === 0) return false;
+            const [hour, minute] = timeStr.split(':').map(Number);
+            const timeValue = hour + minute/60;
+            if (dayOfWeek === 3 || dayOfWeek === 5 || dayOfWeek === 6) {
+                return timeValue >= 14.0 && timeValue <= 18.5;
+            } else {
+                return timeValue >= 9.0 && timeValue <= 18.5;
+            }
+        }
+
+        const form = document.getElementById('appointmentForm');
+        const nameInp = document.getElementById('name');
+        const phoneInp = document.getElementById('phone');
+        const dateInp = document.getElementById('date');
+        const timeInp = document.getElementById('time');
+        const obsInp = document.getElementById('obs');
+
+        function clearErrors() {
+            document.querySelectorAll('.field.error').forEach(f => {
+                f.classList.remove('error');
+                const oldMsg = f.querySelector('.error-message');
+                if(oldMsg) oldMsg.remove();
+            });
+            const globalErr = document.querySelector('.global-error');
+            if(globalErr) globalErr.remove();
+        }
+
+        function showFieldError(fieldElement, message) {
+            fieldElement.classList.add('error');
+            let errDiv = fieldElement.querySelector('.error-message');
+            if(!errDiv) {
+                errDiv = document.createElement('div');
+                errDiv.className = 'error-message';
+                fieldElement.appendChild(errDiv);
+            }
+            errDiv.innerText = message;
+        }
+
+        function showGlobalError(message) {
+            let globalErr = document.querySelector('.global-error');
+            if(!globalErr) {
+                globalErr = document.createElement('div');
+                globalErr.className = 'error-message global-error';
+                globalErr.style.marginBottom = '16px';
+                globalErr.style.textAlign = 'center';
+                const formHeader = document.querySelector('#form .form-inner-grid .form-head');
+                if(formHeader) formHeader.insertAdjacentElement('afterend', globalErr);
+            }
+            globalErr.innerText = message;
+        }
+
+        function validateForm() {
+            let isValid = true;
+            clearErrors();
+
+            if(!nameInp.value.trim()) {
+                showFieldError(document.querySelector('[data-field="name"]'), 'Nome obrigatório');
+                isValid = false;
+            }
+            if(!phoneInp.value.trim()) {
+                showFieldError(document.querySelector('[data-field="phone"]'), 'Telefone obrigatório');
+                isValid = false;
+            }
+            if(!serviceSelect.value) {
+                showFieldError(document.querySelector('[data-field="service"]'), 'Selecione um serviço');
+                isValid = false;
+            }
+            if(!dateInp.value) {
+                showFieldError(document.querySelector('[data-field="date"]'), 'Selecione a data');
+                isValid = false;
+            }
+            if(!timeInp.value) {
+                showFieldError(document.querySelector('[data-field="time"]'), 'Selecione o horário');
+                isValid = false;
+            }
+
+            if(dateInp.value && timeInp.value && isValid) {
+                if(!isTimeSlotValid(dateInp.value, timeInp.value)) {
+                    showFieldError(document.querySelector('[data-field="time"]'), 'Horário indisponível. Funcionamento: Segunda a Sábado, 9h-18h30 (Ter/Qui/Sex apenas 14h-18h30).');
+                    isValid = false;
+                }
+            }
+
+            if(!isValid) {
+                showGlobalError('Preencha todos os campos obrigatórios e verifique os horários permitidos.');
+                return false;
+            }
+            return true;
+        }
+
+        function generateICS(data) {
+            const startDate = new Date(`${data.date}T${data.time}:00`);
+            const endDate = new Date(startDate.getTime() + 60*60*1000);
+            const formatICS = (d) => d.toISOString().replace(/-|:|\.\d+/g, '');
+            const dtStart = formatICS(startDate);
+            const dtEnd = formatICS(endDate);
+            const summary = "Agendamento - Julya Nail Designer";
+            const description = `Nome: ${data.name}\nTelefone: ${data.phone}\nServiço: ${data.service}\nObservações: ${data.obs}`;
+            return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Julya Nail//Agendamento//PT
+BEGIN:VEVENT
+UID:${Date.now()}@julyanail.com
+DTSTAMP:${dtStart}
+DTSTART:${dtStart}
+DTEND:${dtEnd}
+SUMMARY:${summary}
+DESCRIPTION:${description.replace(/\n/g, '\\n')}
+END:VEVENT
+END:VCALENDAR`;
+        }
+
+        let pendingFormData = null;
+
+        function openWhatsAppAndModal(formData) {
+            const msg = `Olá! Gostaria de agendar um atendimento premium.\n\n👤 Nome: ${formData.name}\n📞 Telefone: ${formData.phone}\n💅 Serviço: ${formData.service}\n📅 Data: ${formData.date}\n⏰ Horário: ${formData.time}\n📝 Observações: ${formData.obs || '—'}\n\nAguardo confirmação.`;
+            const waUrl = `https://wa.me/558188073807?text=${encodeURIComponent(msg)}`;
+            window.open(waUrl, '_blank');
+            pendingFormData = formData;
+            const modal = document.getElementById('modalConfirm');
+            modal.classList.add('active');
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(!validateForm()) return;
+            const formData = {
+                name: nameInp.value.trim(),
+                phone: phoneInp.value.trim(),
+                service: serviceSelect.value,
+                date: dateInp.value,
+                time: timeInp.value,
+                obs: obsInp.value.trim() || ''
+            };
+            openWhatsAppAndModal(formData);
+        });
+
+        const modal = document.getElementById('modalConfirm');
+        const addCalBtn = document.getElementById('modalAddCalendar');
+        const closeModalBtn = document.getElementById('modalCloseBtn');
+        function closeModal() { modal.classList.remove('active'); pendingFormData = null; }
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+        addCalBtn.addEventListener('click', () => {
+            if(pendingFormData) {
+                const icsContent = generateICS(pendingFormData);
+                const blob = new Blob([icsContent], {type: 'text/calendar'});
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = `Agendamento_Julya_${pendingFormData.date}.ics`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                closeModal();
+            } else { closeModal(); }
+        });
+
+        const io = new IntersectionObserver(entries => {
+            entries.forEach((e, idx) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), idx * 60);
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
+</script>
+</body>
+</html>
